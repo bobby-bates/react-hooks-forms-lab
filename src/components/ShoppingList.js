@@ -33,10 +33,13 @@ function ShoppingList({ items }) {
   const handleSearchChange = e => setSearchStr(e.target.value)
   const handleCategoryChange = e => setSelectedCategory(e.target.value)
 
-  // TODO: Sort out logic here
   const itemsToDisplay = itemsList.filter((item) => {
-    if (item === searchStr) return true
-    else if (selectedCategory === "All" && searchStr === '') return true;
+    // WARNING: Logic bomb incoming:
+    if (searchStr !== '') {
+      const isMatching = item.name.startsWith(searchStr)
+      if (selectedCategory === 'All' && isMatching) return true
+      else return item.category === selectedCategory && isMatching
+    } else if (selectedCategory === "All") return true
     else return item.category === selectedCategory;
   });
 
