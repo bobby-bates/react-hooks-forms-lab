@@ -1,6 +1,7 @@
 import React from "react";
 
-function Filter({ searchStr, onSearchChange, onCategoryChange }) {
+function Filter({ search, onSearchChange, onCategoryChange }) {
+  // TODO: make <select> a controlled element
   return (
     <div className="Filter">
       <input 
@@ -8,7 +9,7 @@ function Filter({ searchStr, onSearchChange, onCategoryChange }) {
         name="search"
         placeholder="Search..."
         onChange={onSearchChange}
-        value={searchStr}
+        value={search}
       />
       <select name="filter" onChange={onCategoryChange}>
         <option value="All">Filter by category</option>
